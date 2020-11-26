@@ -45,7 +45,22 @@ def main():
    button2 = pygame.Rect(100, 170, 200, 50)
    button3 = pygame.Rect(100, 240, 200, 50)
    button4 = pygame.Rect(300, 335, 100, 50)
+   button5 = pygame.Rect(300, 30, 100, 50)
+   block_helper = pygame.Rect(100, 90, 200, 240)
 
+   tNormal = myfont.render('Normal', False, (255, 255, 255))
+   tHard = myfont.render('Hard', False, (255, 255, 255))
+   tExtereme = myfont.render('Extereme', False, (255, 255, 255))
+   tHelper = myfont.render('Helper', False, (0, 92, 179))
+   pygame.draw.rect(screen, [179, 198, 255], button1)  # draw button
+   pygame.draw.rect(screen, [128, 159, 255], button2)  # draw button
+   pygame.draw.rect(screen, [77, 121, 255], button3)  # draw button
+   pygame.draw.rect(screen, [153, 204, 255], button4)  # draw button
+   screen.blit(tNormal,(165,110))
+   screen.blit(tHard, (175, 180))
+   screen.blit(tExtereme, (160, 250))
+   screen.blit(tHelper, (320, 350))
+   
    sflag = True
    while sflag:
          for event in pygame.event.get():
@@ -63,7 +78,7 @@ def main():
                      col = 4
                      row = 4
                      sflag = False
-                     diff_level = 16
+                     diff_level = 2048
 
                if button2.collidepoint(mouse_pos):
                     # prints current location of mouse
@@ -84,19 +99,30 @@ def main():
                if button4.collidepoint(mouse_pos):
                     # prints current location of mouse
                      print('button was pressed at {0}'.format(mouse_pos))
+                     pygame.draw.rect(screen, [179, 198, 255], block_helper)  # draw button
+                     font1 = pygame.font.SysFont("Verdana", 18, bold=False)
+                     rule1 = font1.render("Use 'w,a,s,d' to move", False, (0, 0, 0))
+                     screen.blit(rule1, (101, 100))
+                     rule2 = font1.render("the tiles. Tiles with", False, (0, 0, 0))
+                     screen.blit(rule2, (101, 140))
+                     rule3 = font1.render("the same number", False, (0, 0, 0))
+                     screen.blit(rule3, (101, 180))
+                     rule4 = font1.render("merge into one when", False, (0, 0, 0))
+                     screen.blit(rule4, (101, 220)) 
+                     rule5 = font1.render("they touch. Add them", False, (0, 0, 0))
+                     screen.blit(rule5, (101, 260))                      
+                     rule6 = font1.render("up to reach 2048!", False, (0, 0, 0))
+                     screen.blit(rule6, (101, 300))
+                     
+                     pygame.draw.rect(screen, [153, 204, 255], button5)  # draw button
+                     resume = myfont.render('Resume', False, (0, 92, 179))
+                     screen.blit(resume, (310, 45))
+                     
+               if button5.collidepoint(mouse_pos):
+                  main()
 
-         tNormal = myfont.render('Normal', False, (255, 255, 255))
-         tHard = myfont.render('Hard', False, (255, 255, 255))
-         tExtereme = myfont.render('Extereme', False, (255, 255, 255))
-         tHelper = myfont.render('Helper', False, (0, 92, 179))
-         pygame.draw.rect(screen, [179, 198, 255], button1)  # draw button
-         pygame.draw.rect(screen, [128, 159, 255], button2)  # draw button
-         pygame.draw.rect(screen, [77, 121, 255], button3)  # draw button
-         pygame.draw.rect(screen, [153, 204, 255], button4)  # draw button
-         screen.blit(tNormal,(165,110))
-         screen.blit(tHard, (175, 180))
-         screen.blit(tExtereme, (160, 250))
-         screen.blit(tHelper, (320, 350))
+
+
          pygame.display.update()
 
    thisCol = 100 * col + ((col + 1) * 10)
